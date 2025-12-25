@@ -130,3 +130,38 @@ export const clearCustomerDues = (customerId) => {
     setStorageData(data)
   }
 }
+export const updateCustomer = (customerId, updates) => {
+  const data = getStorageData()
+  const index = data.customers.findIndex(c => c.id === customerId)
+  if (index !== -1) {
+    data.customers[index] = { ...data.customers[index], ...updates }
+    setStorageData(data)
+  }
+}
+
+export const deleteCustomer = (customerId) => {
+  const data = getStorageData()
+  // Check if customer has any invoices
+  const hasInvoices = data.invoices.some(inv => inv.customerId === customerId)
+  if (hasInvoices) {
+    return { success: false, message: 'Cannot delete customer with existing invoices' }
+  }
+  data.customers = data.customers.filter(c => c.id !== customerId)
+  setStorageData(data)
+  return { success: true }
+}
+
+export const updateItem = (itemId, updates) => {
+  const data = getStorageData()
+  const index = data.items.findIndex(i => i.id === itemId)
+  if (index !== -1) {
+    data.items[index] = { ...data.items[index], ...updates }
+    setStorageData(data)
+  }
+}
+
+export const deleteItem = (itemId) => {
+  const data = getStorageData()
+  data.items = data.items.filter(i => i.id !== itemId)
+  setStorageData(data)
+}

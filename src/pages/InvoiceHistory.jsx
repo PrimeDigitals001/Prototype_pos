@@ -42,7 +42,7 @@ export default function InvoiceHistory() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Invoice History</h1>
         <select
@@ -63,8 +63,9 @@ export default function InvoiceHistory() {
           <p className="text-gray-500 text-lg">No invoices found</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <table className="w-full">
+        // Add horizontal scroll for table on mobile
+<div className="bg-white rounded-xl border border-gray-200 overflow-x-auto">
+  <table className="w-full min-w-[800px]">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Invoice ID</th>

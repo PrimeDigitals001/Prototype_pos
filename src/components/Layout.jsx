@@ -1,7 +1,10 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import { LayoutDashboard, Users, Package, ShoppingCart, FileText } from 'lucide-react'
+import { LayoutDashboard, Users, Package, ShoppingCart, FileText, Menu, X } from 'lucide-react'
+import { useState } from 'react'
 
 export default function Layout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/customers', icon: Users, label: 'Customers' },
@@ -12,8 +15,29 @@ export default function Layout() {
 
   return (
     <div className="flex h-screen bg-gray-50">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg"
+      >
+        {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200">
+      <aside className={`
+        fixed lg:static inset-y-0 left-0 z-40
+        w-64 bg-white border-r border-gray-200
+        transform transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-gray-800">POS System</h1>
         </div>
@@ -22,6 +46,7 @@ export default function Layout() {
             <NavLink
               key={item.to}
               to={item.to}
+              onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive

@@ -155,12 +155,12 @@ export default function NewPurchase() {
     <div className="p-8 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">New Purchase</h1>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Customer & Items */}
-        <div className="col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           {/* Customer Selection */}
-          <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Select Customer</label>
+          <div className="bg-white p-6 rounded-xl border border-gray-200 lg:sticky lg:top-8">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Select Customer</label>
             <select
               value={selectedCustomer}
               onChange={(e) => setSelectedCustomer(e.target.value)}

@@ -1,8 +1,8 @@
 // Initialize dummy data
 const INITIAL_DATA = {
   customers: [
-    { id: '1', name: 'Rajesh Kumar', phone: '9876543210', outstanding: 0 },
-    { id: '2', name: 'Priya Sharma', phone: '9876543211', outstanding: 0 },
+    { id: '1', name: 'Rajesh Kumar', phone: '9876543210', outstanding: 0, shift: 'morning' },
+    { id: '2', name: 'Priya Sharma', phone: '9876543211', outstanding: 0, shift: 'evening' },
   ],
   items: [
     // Fixed Items - Complete packages
